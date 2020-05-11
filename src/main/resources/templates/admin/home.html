@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin home</title>
+    <div th:replace="header :: myheader"></div>
+    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/adminHome.css}"/>
+    <link rel="stylesheet" th:href="@{/css/objects.css}"/>
+    <link rel="stylesheet" th:href="@{/css/background.css}"/>
+
+</head>
+<body>
+<h1>Administrator view</h1>
+
+<p1>
+    <button class="button" onclick="allNodes()">View all nodes</button>
+    <br>
+</p1>
+
+<table id="nodeTable" style="width:30%">
+    <thead>
+    <tr>
+        <th>Node ID</th>
+        <th>IP adress</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+<div th:fragment="myheader">
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <ul>
+        <li><a sec:authorize="!isAuthenticated()" href="/login">Login</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin/home">Manage</a></li>
+        <li><a sec:authorize="isAuthenticated()" href="/user/home">Access files</a></li>
+        <li><a sec:authorize="isAuthenticated()" href="/logout">Logout</a></li>
+        <!--<li><a sec:authorize="isAuthenticated()" sec:authentication="name"></a></li>-->
+    </ul>
+</div>
+</body>
+</html>

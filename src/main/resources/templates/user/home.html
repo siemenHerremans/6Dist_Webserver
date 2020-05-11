@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User home</title>
+    <div th:replace="header :: myheader"></div>
+    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/userHome.css}"/>
+    <link rel="stylesheet" th:href="@{/css/objects.css}"/>
+    <link rel="stylesheet" th:href="@{/css/background.css}"/>
+
+</head>
+<body>
+    <h1>
+        Download a file
+    </h1>
+
+    <p1>
+        <label class="label">Filename:</label>
+        <input type="text" id="filenameField">
+        <button class="button" onclick="downloadFile()">Download</button><br>
+        <label hidden class="label" id="downloadNode"></label>
+    </p1>
+</body>
+</html>

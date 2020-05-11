@@ -1,0 +1,27 @@
+<body>
+<h2>Sorry, you do not have permission to view this page.</h2>
+
+<p>Click here to log in with a different account:<br>
+    <button type="button" id="loginButton"> Login </button></p>
+
+<p>Click here to try and continue as a user:<br>
+    <button type="button" id="userButton"> Continue as user </button></p>
+
+<p>Click here to go back to the home page:<br>
+    <button type="button" id="homeButton"> Go to home page </button></p>
+
+<script type="text/javascript">
+    document.getElementById("homeButton").onclick = function () {
+        location.href = "/";
+    };
+
+    document.getElementById("userButton").onclick = function () {
+        location.href = "/user/home";
+    };
+
+    document.getElementById("loginButton").onclick = function () {
+        location.href = "/login";
+    }
+</script>
+
+</body>

@@ -17,10 +17,10 @@ public class HttpClient {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public void putHTTP(String ip, String data){
+    /*public void putHTTP(String ip, String data){
         String url = "http://" + ip + ":8081/" + data;
         restTemplate.put(url, String.class);
-    }
+    }*/
 
     public ResponseEntity<String> getHTTP(String ip, String data){
         String url = "http://" + ip + ":8081/" + data;

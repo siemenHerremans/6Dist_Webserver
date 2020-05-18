@@ -2,6 +2,8 @@
 async function downloadFile() {
 
     const input = document.getElementById('filenameField').value;
+    let label = document.getElementById("downloadNode");
+    label.hidden = true;
 
     //Resolving the correct IP adress where the file should be located
     const nodeIP = await fetch('http://localhost:8080/user/location?filename='.concat(input))
@@ -17,12 +19,30 @@ async function downloadFile() {
             window.alert(error);
         });
 
-    //Showing the correct node:
-    let label = document.getElementById("downloadNode");
-    label.innerHTML = ('The file is downloading from a node with IP: ').concat(nodeIP);
-    label.hidden = false;
-    //Downloading the file MOET HIER KOMEN
+    //Check if file exists
+    await fetch('http://localhost:8080/user/exists?ip='.concat(nodeIP).concat('&filename=').concat(input))
+        .then(response => {
+            if (response.status == 204){
+                throw new Error('The file is not found on the node!');
+            }else if (!response.ok){
+                console.log(response.status);
+                throw new Error('Something is wrong with the connection!')
+            }
 
+            //Downloading the file:
+            label.innerHTML = ('The file is downloading from a node with IP: ').concat(nodeIP);
+            label.hidden = false;
+
+            const url = 'http://localhost:8080/user/getfile/'.concat(nodeIP).concat('/').concat(input);
+            console.log(url);
+            let link = document.getElementById("downlink");
+            link.setAttribute("href", url);
+            link.click();
+
+        }).catch(error => {
+            console.error('Something went wrong:', error);
+            window.alert(error);
+        });
 }
 
 //Admin functions:
@@ -62,6 +82,7 @@ async function allNodes() {
         newCell2.appendChild(newText2);
     }
     tableRef.parentNode.replaceChild(new_tbody, tableRef);
-
-
+    
 }
+
+

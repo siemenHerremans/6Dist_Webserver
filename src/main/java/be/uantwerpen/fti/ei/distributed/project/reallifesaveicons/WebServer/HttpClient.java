@@ -35,4 +35,9 @@ public class HttpClient{
         String url = "http://" + ip + ":8082/" + data;
         return restTemplate.getForObject(url, List.class);
     }
+
+    public void putHTTP(String ip, String data){
+        String url = "http://" + ip + ":8081/" + data;
+        restTemplate.put(url, void.class);
+    }
 }

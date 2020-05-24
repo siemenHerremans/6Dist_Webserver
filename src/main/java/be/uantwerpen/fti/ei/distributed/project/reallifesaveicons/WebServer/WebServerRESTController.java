@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
@@ -40,5 +41,30 @@ public class WebServerRESTController {
         return client.getHTTPString(namingIP, "/allnodes");
     }
 
+    @RequestMapping(value = "admin/allfiles", method = RequestMethod.GET)
+    public ResponseEntity<List<List<String>>> allfiles(@RequestParam(value = "ip") String ip){
+
+        List<List<String>> response = client.getHTTPLists(ip, "/getfiles");
+
+        //Check if there are files
+        boolean allEmpty = true;
+        for (List subList : response){
+            if (!subList.isEmpty()) allEmpty = false;
+        }
+
+        if (allEmpty){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "admin/shutdown", method = RequestMethod.GET)
+    public ResponseEntity shutdown(@RequestParam(value = "ip") String nodeip){
+        System.out.println(nodeip);
+        client.putHTTP(nodeip, "/shutdown");
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 }

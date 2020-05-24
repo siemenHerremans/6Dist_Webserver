@@ -4,15 +4,17 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Admin home</title>
+    <title>Node overview</title>
     <div th:replace="header :: myheader"></div>
+
     <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
-    <link rel="stylesheet" th:href="@{/css/adminHome.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/table.css}"/>
     <link rel="stylesheet" th:href="@{/css/objects.css}"/>
     <link rel="stylesheet" th:href="@{/css/background.css}"/>
 
 </head>
-<body>
+<body onload="allNodes()">
 <h1>Administrator view</h1>
 
 <p1>

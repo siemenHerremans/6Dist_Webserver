@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="header :: myheader"></div>
+    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+    <title>Admin node</title>
+
+    <link rel="stylesheet" th:href="@{/css/objects.css}"/>
+    <link rel="stylesheet" th:href="@{/css/background.css}"/>
+    <link rel="stylesheet" th:href="@{/css/table.css}"/>
+
+</head>
+
+
+<body onload='loadNodeAdmin()'>
+
+
+<div>
+    <!-- <button class = "button" onclick="loadNodeAdmin()"> Refresh </button>-->
+
+    <table style="width:30%">
+        <thead>
+        <tr>
+            <th>Local files</th>
+        </tr>
+        </thead>
+        <tbody id="localBody">
+        </tbody>
+    </table>
+    <table style="width:30%">
+        <thead>
+        <tr>
+            <th>Replicated files</th>
+        </tr>
+        </thead>
+        <tbody id="replicatedBody">
+        </tbody>
+    </table>
+</div>
+
+
+<div>
+    <button class="button" onclick="shutdown()">Shut down node</button>
+</div>
+
+<a href="" id="downlink" style="display:none">Benny</a>
+
+</body>
+</html>

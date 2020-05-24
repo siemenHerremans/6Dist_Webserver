@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User home</title>
+    <title>File download</title>
     <div th:replace="header :: myheader"></div>
     <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
     <link rel="stylesheet" th:href="@{/css/userHome.css}"/>
@@ -20,7 +20,7 @@
     <p1>
         <label class="label">Filename:</label>
         <input type="text" id="filenameField">
-        <button class="button" onclick="downloadFile()">Download</button><br>
+        <button class="button" onclick="downloadClicked()">Download</button><br>
         <label hidden class="label" id="downloadNode"></label>
     </p1>
 

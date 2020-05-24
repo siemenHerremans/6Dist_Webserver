@@ -6,9 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -31,13 +29,18 @@ public class WebServerController {
     }
 
     @RequestMapping(value = "/admin/home")
-    public String adminHome(){
-        return "/admin/home";
+    public String allNodes(){
+        return "admin/allnodes";
+    }
+
+    @RequestMapping(value = "/admin/{nodeID}")
+    public String nodeAdmin(){
+        return "admin/nodeAdmin";
     }
 
     @RequestMapping(value = "/user/home")
-    public String userHome(){
-        return "/user/home";
+    public String fileDownload(){
+        return "user/fileDownload";
     }
 
     //Downloading the file

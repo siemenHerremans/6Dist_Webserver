@@ -11,6 +11,9 @@
     cursor: pointer;
 }
 
+.button:hover{
+    background-color: #111111;
+}
 .label{
     background-color: #4CAF50;
     color: white;

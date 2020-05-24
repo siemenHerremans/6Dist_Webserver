@@ -2,14 +2,15 @@ package be.uantwerpen.fti.ei.distributed.project.reallifesaveicons.WebServer;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -27,8 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http
                 .authorizeRequests()
-                    .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+                    .antMatchers(HttpMethod.GET, "/admin/**").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.PUT, "/admin/**").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.GET,"/user/**").hasAnyRole("ADMIN", "USER")
+                    .antMatchers(HttpMethod.PUT,"/user/**").hasAnyRole("ADMIN", "USER")
                     .and()
                     .formLogin()
                     .and()
@@ -36,16 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .logout()
                     .logoutSuccessUrl("/");
-    }
-
-    @Bean
-    public AuthenticationEntryPoint loginUrlAuthenticationEntryPointUser(){
-        return new LoginUrlAuthenticationEntryPoint("/user/home");
-    }
-
-    @Bean
-    public AuthenticationEntryPoint loginUrlAuthenticationEntryPointAdmin(){
-        return new LoginUrlAuthenticationEntryPoint("/admin/home");
     }
 
     @Bean

@@ -146,8 +146,28 @@ async function shutdown() {
     let url = window.location.href.toString().split("admin/");
     const nodeip = url[1];
 
-    await fetch('http://localhost:8080/admin/shutdown?ip='.concat(nodeip));
-    alert("Node has been terminated!");
+    await timeout(1000, fetch('http://localhost:8080/admin/shutdown?ip='.concat(nodeip)))
+        .then(response => {
+            if (response.status === 500) {
+                throw new Error('Something went wrong: does the node exist?');
+            } else if (!response.ok) {
+                console.log(response.status);
+                throw new Error('An unknown error occurred!')
+            }
+            alert("Node has been terminated!");
+            window.location = 'http://localhost:8080/admin/home';
+        }).catch(error => {
+            console.error('Something went wrong:', error);
+            window.alert(error);
+        });
 
-    window.location = 'http://localhost:8080/admin/home';
+}
+
+function timeout(ms, promise) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            reject(new Error("A time-out occurred, the node is probably not reachable"))
+        }, ms)
+        promise.then(resolve, reject)
+    })
 }

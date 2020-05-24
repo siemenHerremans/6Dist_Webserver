@@ -37,7 +37,7 @@ public class HttpClient{
     }
 
     public void putHTTP(String ip, String data){
-        String url = "http://" + ip + ":8081/" + data;
+        String url = "http://" + ip + ":8082/" + data;
         restTemplate.put(url, void.class);
     }
 }
